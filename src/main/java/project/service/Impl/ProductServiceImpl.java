@@ -37,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
 
         Product product = this.modelMapper.map(productServiceModel, Product.class);
         Category category = this.modelMapper.map(this.categoryService.findByName(productServiceModel.getCategory().getCategoryName()), Category.class);
-       // category.setProducts(Collections.singletonList(product));
+       
         product.setCategory(category);
 
         this.productRepository.saveAndFlush(product);
