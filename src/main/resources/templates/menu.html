@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <!--  <th:block th:include="~{/fragments/head}"></th:block>-->
+
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>ROUTE 80</title>
+    <link rel="stylesheet" href="/css/reset-css.css"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="/css/style.css"/>
+</head>
+<body>
+<header>
+    <th:block th:include="~{/fragments/navbar}"></th:block>
+
+    <!--<nav class="navbar navbar-expand-lg bg-nav rounded">
+        <a class="nav-link text-white active h5" href="/">Route 80</a>
+        <ul class="navbar-nav row">
+            <li class="nav-item col-md-4"  sec:authorize="hasRole('ROLE_ADMIN')">
+                <a class="nav-link text-white active h5" href="/products/add">Add product</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav row">
+            <li class="nav-item col-md-4">
+                <a class="nav-link text-white active h5" href="/about-us">About us</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav row">
+            <li class="nav-item col-md-4">
+                <a class="nav-link text-white active h5" href="/contacts">Contacts</a>
+            </li>
+        </ul>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <form th:action="@{/logout}" method="post">
+                        <button type="submit"
+                                class="nav-link text-white active h5">
+                            Logout
+                        </button>
+                    </form>
+                </li>
+            </ul>
+        </div>
+    </nav>-->
+</header>
+<main>
+    <div class="container bg-blur rounded mt-5 mb-4">
+        <h1 class="text-center mt-2"><span class="badge badge-success badge-danger">Menu</span></h1>
+        <div  class="row mt-3 mb-3" >
+            <div class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded">Salads</h3>
+                <div th:each="s :${salads}" class="mt-3 rounded badge-info" >
+                    <img class="mr-2" src="/img/food.png" alt="Food" width="50px" height="50px">
+                    <span th:text="|Name: *{s.name} Price: *{s.price} lv|" ></span>
+                    <a class="ml-3 text-danger" th:href="@{/products/buy/{id}(id = *{id})}">Buy</a>
+                </div>
+            </div>
+            <div  class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded"  >Soups</h3>
+                <div th:each="s :${soups}" class="mt-3 rounded badge-warning" >
+                    <img class="mr-2" src="/img/food.png" alt="Food" width="50px" height="50px">
+                    <span th:text="|Name: *{s.name} Price: *{s.price} lv|" ></span>
+                    <a class="ml-3 text-danger" th:href="@{/products/buy/{id}(id = *{s.getId()})}">Buy</a>
+                </div>
+            </div>
+           <!-- <div  class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded"  >Appetizers</h3>
+                <div th:each="a :${appetizers}" class="mt-3 rounded badge-warning" >
+                    <img class="mr-2" src="/img/food.png" alt="Food" width="50px" height="50px">
+                    <span th:text="|Name: *{a.name} Price: *{a.price} lv|" ></span>
+                    <a class="ml-3 text-danger" th:href="@{/products/buy/{id}(id = *{a.getId()})}">Buy</a>
+                </div>
+            </div>-->
+            <div  class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded"  >Dishes</h3>
+                <div th:each="d :${dishes}" class="mt-3 rounded badge-warning" >
+                    <img class="mr-2" src="/img/food.png" alt="Food" width="50px" height="50px">
+                    <span th:text="|Name: *{d.name} Price: *{d.price} lv|" ></span>
+                    <a class="ml-3 text-danger" th:href="@{/products/buy/{id}(id = *{d.getId()})}">Buy</a>
+                </div>
+            </div>
+            <div  class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded"  >Desserts</h3>
+                <div th:each="de :${desserts}" class="mt-3 rounded badge-warning" >
+                    <img class="mr-2" src="/img/food.png" alt="Food" width="50px" height="50px">
+                    <span th:text="|Name: *{de.name} Price: *{de.price} lv|" ></span>
+                    <a class="ml-3 text-danger" th:href="@{/products/buy/{id}(id = *{de.getId()})}">Buy</a>
+                </div>
+            </div>
+            <div  class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded"  >Alcoholic</h3>
+                <div th:each="a :${alcoholic}" class="mt-3 rounded badge-warning" >
+                    <img class="mr-2" src="/img/drink.png" alt="Food" width="50px" height="50px">
+                    <span th:text="|Name: *{a.name} Price: *{a.price} lv|" ></span>
+                    <a class="ml-3 text-danger" th:href="@{/products/buy/{id}(id = *{a.getId()})}">Buy</a>
+                </div>
+            </div>
+            <div  class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                <h3 class="mySticky bg-gray text-dark rounded"  >Non Alcoholic</h3>
+                <div th:each="an :${nonAlcoholic}" class="mt-3 rounded badge-warning" >
+                    <img class="mr-2" src="/img/drink.png" alt="Food" width="50px" height="50px">
+                    <span th:text="|Name: *{an.name} Price: *{an.price} lv|" ></span>
+                    <a class="ml-3 text-danger" th:href="@{/products/buy/{id}(id = *{an.getId()})}">Buy</a>
+                </div>
+            </div>
+        </div>
+        <!--  <div th:if="*{category == 'HOUSEHOLD'}" class="row mt-3 mb-3" th:each="p:${products}" th:object="${p}">
+              <div  class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                  <h3 class="mySticky bg-gray text-dark rounded">Households</h3>
+                      <div class="mt-3 rounded badge-success">
+                          <img class="mr-2" src="/img/household.png" alt="Food" width="50px" height="50px">
+                          <span th:text="|Name: *{name} Price: *{price} lv|" ></span>
+                          <a class="ml-3 text-danger" th:href="@{/products/buy/{id}(id = *{id})}">Buy</a>
+                      </div>
+              </div>
+              <div th:if="*{category == 'OTHER'}" class="col-5 bg-dark rounded m-auto" style="height: 30vh; overflow: auto">
+                  <h3 class="mySticky bg-gray text-dark rounded">Other</h3>
+                      <div class="mt-3 rounded badge-secondary">
+                          <img class="mr-2" src="/img/other.png" alt="Food" width="50px" height="50px">
+                          <span th:text="|Name: *{name} Price: *{price} lv|" ></span>
+                          <a class="ml-3 text-danger" th:href="@{/products/buy/{id}(id = *{id})}">Buy</a>
+                      </div>
+              </div>
+          </div>
+          <a th:href="@{/products/buy/all}" class="btn btn-danger" th:text="|Buy all products for  lv|"></a>
+      </div>-->
+</main>
+<footer class="footer bg-transparent  py-2">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</footer>
+</body>
+</html>

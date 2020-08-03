@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{/fragments/nav}"></th:block>
+
+    <!-- <nav class="navbar navbar-expand-lg bg-nav rounded">
+
+         <a class="nav-link text-white active h5" href="/">Route 80</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+             <ul class="navbar-nav row">
+                 <li class="nav-item col-md-4">
+                     <a class="nav-link text-white active h5" href="/contacts">Contacts</a>
+                 </li>
+                 <li class="nav-item col-md-4">
+                     <a class="nav-link text-white active h5" href="/about-us">About us</a>
+                 </li>
+                 <li class="nav-item col-md-4">
+                     <a class="nav-link text-white active h5" href="/registration">Sign up</a>
+                 </li>
+             </ul>
+         </div>
+     </nav>-->
+</header>
+<main>
+    <h1 class="text-center mt-50"><span class="badge badge-pill badge-blur"> </span></h1>
+    <form  class="mx-auto w-25 bg-blur" th:action="@{/login/authenticate}" th:method="POST">
+        <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Login</span></h1>
+        <hr class="hr-3 w-75 bg-danger"/>
+        <small th:if="${error}"  class="text-danger">This user not found!</small>
+        <br/>  
+        <small th:if="${error}"  class="text-danger">Incorrect username or password!</small>
+        <div class="form-group">
+            <div class="label-holder text-white d-flex justify-content-center">
+                <label for="username" class="h3 mb-2">Username</label>
+            </div>
+            <input th:value="${username}"  type="text" class="form-control" id="username" name="username"/>
+        </div>
+        <div class="form-group">
+            <div class="label-holder text-white d-flex justify-content-center">
+                <label for="password" class="h3 mb-2">Password</label>
+            </div>
+            <input th:value="${password}" type="password" class="form-control" id="password" name="password"/>
+        </div>
+        <div class="button-holder d-flex justify-content-center">
+            <button type="submit" class="btn btn-warning  mb-3">Login</button>
+        </div>
+
+       <!-- <li class="nav-item" >
+            <a class="nav-link d-flex justify-content-right" th:href="@{/registration}">Sign up</a>
+        </li>-->
+    </form>
+</main>
+
+<footer class="footer bg-transparent  py-2">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</footer>
+</body>
+</html>

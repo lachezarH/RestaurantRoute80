@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<header>
+    <th:block th:include="~{/fragments/navbar}"></th:block>
+
+    <!-- <nav class="navbar navbar-expand-lg bg-nav rounded">
+         <a class="nav-link text-white active h5" href="/">Route 80</a>
+         <a class="nav-link text-white active h5" href="/products/add">Add Product</a>
+
+         <ul class="navbar-nav row">
+             <li class="nav-item col-md-4">
+                 <a  class="nav-link text-white active h5" href="/about-us">About us</a>
+             </li>
+         </ul>
+         <ul class="navbar-nav row">
+             <li class="nav-item col-md-4">
+                 <a class="nav-link text-white active h5" href="/contacts">Contacts</a>
+             </li>
+         </ul>//todo
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+             <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+             <ul class="navbar-nav row">
+                 <li class="nav-item col-md-4">
+                     <a class="nav-link text-white active h5" href="/users/logout">Logout</a>
+                 </li>
+             </ul>
+         </div>
+     </nav>-->
+</header>
+<main>
+    <div class="container bg-blur rounded mt-5 ">
+        <h1>About us</h1>
+        <hr class="my-3 bg-danger w-50"/>
+
+        <p class="h4">Restaurant chain "Route 80" are beautiful and peaceful place near Sofia.
+            Suitable for any kind of family, friends or business meetings.
+            Restaurant "Route 80" are preferred and beloved among the residents and guests of the capital.
+            Here you will find delicious and fresh foods, smiling staff, nice music and a lively atmosphere.
+            If you enjoy delicious fresh Greece salads, aromatic wines and beers, custom desserts, you are welcome!</p>
+        <hr class="my-3 bg-danger w-75" />
+        <td th:width="330" >
+            <table border="0" cellpadding="" cellspacing="0" width="330">
+                <tbody>
+                <tr>
+                    <td colspan="3" height="15" class="banner_top"></td>
+                </tr>
+                <tr>
+                    <td width="15" class="banner_left"></td>
+                    <td>
+                    <img src="https://scontent.fsof8-1.fna.fbcdn.net/v/t1.0-9/104469367_568656503839292_7238223628953873464_o.jpg?_nc_cat=107&_nc_sid=730e14&_nc_ohc=oAhEijEugvcAX8D15LF&_nc_ht=scontent.fsof8-1.fna&oh=12de5615d57319eebb6f16a9c8ca762c&oe=5F453120"
+                         width="1075" height="800">
+                    </td>
+                    <td width="200" class="banner_right"></td>
+                </tr>
+                   <tr>
+                       <td colspan="3" height="25" class="banner_bottom"></td>
+                   </tr>
+                </tbody>
+            </table>
+            <table border="0" cellpadding="0" cellspacing="0" width="330">
+                <tbody>
+                <tr>
+                    <td colspan="3" height="15" class="banner_top"></td>
+                </tr>
+                <tr>
+                    <td width="15" class="banner_left"></td>
+                    <td>
+                        <img src="https://scontent.fsof8-1.fna.fbcdn.net/v/t1.0-9/115473951_917643202076680_1094299801704783063_o.jpg?_nc_cat=108&_nc_sid=8bfeb9&_nc_ohc=9ffJNfm9cPYAX_rshSB&_nc_ht=scontent.fsof8-1.fna&oh=4a74827141bf8c6588eafe32c841dc98&oe=5F471453"
+                             width="1075" height="800">
+                    </td>
+                    <td width="15" class="banner_right"></td>
+                </tr>
+                <tr>
+                    <td colspan="3" height="25" class="banner_bottom"></td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+
+
+        <h3>
+            <a class="text-danger" th:href="@{https://www.facebook.com/restaurant.route80}">Check</a>
+            our facebook page.
+
+        </h3>
+    </div>
+</main>
+<footer class="footer bg-transparent  py-2">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+
+</footer>
+</body>
+</html>

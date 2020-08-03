@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+    <header>
+         <nav class="navbar navbar-expand-lg bg-nav rounded">
+             <a class="nav-link text-white active h5" href="/">Shopping List App</a>
+             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                 <span class="navbar-toggler-icon"></span>
+             </button>
+             <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+                 <ul class="navbar-nav row">
+                     <li class="nav-item col-md-4">
+                         <a class="nav-link text-white active h5" th:href="@{/users/login}">Login</a>
+                     </li>
+                     <li class="nav-item col-md-4">
+                         <a class="nav-link text-white active h5" th:href="@{/users/register}">Register</a>
+                     </li>
+                 </ul>
+             </div>
+		</nav>
+    </header>
+    <main>
+        <div class="container bg-blur rounded mt-5 ">
+            <h1>Route 80</h1>
+            <hr class="my-3 bg-white w-50"/>
+            <p class="h4">The application is here to help us keep in mind our shopping needs.</p>
+            <hr class="my-3 bg-white w-75" />
+            <h3>
+                <a class="text-primay" th:href="@{/users/login}">Login</a>
+                if you have an account or
+                <a class="text-primay" th:href="@{/users/register}">Register</a>
+                now and check our deals.
+            </h3>
+        </div>
+    </main>
+    <footer class="footer bg-transparent  py-2">
+        <th:block th:include="~{/fragments/footer}"></th:block>
+
+    </footer>
+</body>
+</html>
