@@ -44,6 +44,12 @@ public class HomeController {
         return "about-us";
     }
 
+    @GetMapping("/gallery")
+    public String gallery(){
+
+        return "gallery";
+    }
+
 
 
 }

@@ -21,4 +21,6 @@ public interface ProductService {
     void buy(String id);
 
     void buyAll();
+
+    ProductServiceModel findById(String id);
 }

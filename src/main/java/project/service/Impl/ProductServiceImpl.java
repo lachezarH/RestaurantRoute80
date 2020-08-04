@@ -15,6 +15,7 @@ import project.service.ProductService;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -85,6 +86,16 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void buyAll() {
         this.productRepository.deleteAll();
+    }
+
+    @Override
+    public ProductServiceModel findById(String id) {
+        Optional<Product> product = this.productRepository.findById(id);
+        ProductViewModel model = this.modelMapper.map(product.orElse(null), ProductViewModel.class);
+        ProductServiceModel modelservice = this.modelMapper.map(product.orElse(null), ProductServiceModel.class);
+
+        System.out.println();
+        return modelservice;
     }
 /*
     @Override

@@ -2,7 +2,9 @@ package project.web;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.servlet.ModelAndView;
+import project.model.service.ProductServiceModel;
 import project.model.view.ProductViewModel;
 import project.service.ProductService;
 import project.service.UserService;
@@ -43,6 +45,22 @@ public class MenuController {
 
         modelAndView.setViewName("menu");
 
+
+        return modelAndView;
+    }
+
+    @GetMapping("/buy/{id}")
+    public String buy(@PathVariable("id") String  id){
+        this.productService.buy(id);
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/details/{id}")
+    public ModelAndView details (@PathVariable("id") String  id ,ModelAndView modelAndView){
+        ProductServiceModel model = this.productService.findById(id);
+        modelAndView.addObject("model", model);
+        modelAndView.setViewName("details");
 
         return modelAndView;
     }
