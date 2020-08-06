@@ -10,10 +10,10 @@ import project.model.service.ProductServiceModel;
 import project.model.view.ProductViewModel;
 import project.repository.ProductRepository;
 import project.service.CategoryService;
+import project.service.CloudinaryService;
 import project.service.ProductService;
 
-import java.util.Arrays;
-import java.util.Collections;
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,21 +23,28 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ModelMapper modelMapper;
     private final CategoryService categoryService;
+    private final CloudinaryService cloudinaryService;
 
-    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper, CategoryService categoryService) {
+
+    public ProductServiceImpl(ProductRepository productRepository, ModelMapper modelMapper, CategoryService categoryService, CloudinaryService cloudinaryService) {
         this.productRepository = productRepository;
         this.modelMapper = modelMapper;
         this.categoryService = categoryService;
+        this.cloudinaryService = cloudinaryService;
     }
 
 
 
     @Override
     @Transactional
-    public void addProduct(ProductServiceModel productServiceModel) {
+    public void addProduct(ProductServiceModel productServiceModel) throws IOException {
 
         Product product = this.modelMapper.map(productServiceModel, Product.class);
         Category category = this.modelMapper.map(this.categoryService.findByName(productServiceModel.getCategory().getCategoryName()), Category.class);
+
+        String imgUrl = this.cloudinaryService.uploadImage(productServiceModel.getImg());
+
+        product.setImgUrl(imgUrl);
 
         product.setCategory(category);
 
@@ -89,67 +96,15 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductServiceModel findById(String id) {
+    public ProductViewModel findById(String id) {
         Optional<Product> product = this.productRepository.findById(id);
         ProductViewModel model = this.modelMapper.map(product.orElse(null), ProductViewModel.class);
         ProductServiceModel modelservice = this.modelMapper.map(product.orElse(null), ProductServiceModel.class);
 
         System.out.println();
-        return modelservice;
-    }
-/*
-    @Override
-    public List<ProductViewModel> findAllByCategoryHouseholds() {
-        return this.productRepository.findAllByCategory_CategoryName_Household()
-                .stream().map(product -> {
-                    ProductViewModel productViewModel = this.modelMapper.map(
-                            product, ProductViewModel.class);
-                    return productViewModel;
-                }).collect(Collectors.toList());
+        return model;
     }
 
-    @Override
-    public List<ProductViewModel> findAllByCategoryDrinks() {
-        return this.productRepository.findAllByCategory_CategoryName_Drink()
-                .stream().map(product -> {
-                    ProductViewModel productViewModel = this.modelMapper.map(
-                            product, ProductViewModel.class);
-                    return productViewModel;
-                }).collect(Collectors.toList());
-    }
-
-
-    @Override
-    public List<ProductViewModel> findAllByCategoryFoods() {
-        return this.productRepository.findAllByCategory_CategoryName_Food()
-                .stream().map(product -> {
-                    ProductViewModel productViewModel = this.modelMapper.map(
-                            product, ProductViewModel.class);
-                    return productViewModel;
-                }).collect(Collectors.toList());
-    }
-
-
-    @Override
-    public List<ProductViewModel> findAllByCategoryOthers() {
-        return this.productRepository.findAllByCategory_CategoryName_Other()
-                .stream().map(product -> {
-                    ProductViewModel productViewModel = this.modelMapper.map(
-                            product, ProductViewModel.class);
-                    return productViewModel;
-                }).collect(Collectors.toList());
-    }*/
-
-   /* @Override
-    public List<ProductServiceModel> findByCategory(CategoryName category) {
-        return this.productRepository.findAllByCategory_CategoryName(category)
-                .stream().map(product -> {
-                    ProductServiceModel productServiceModel = this.modelMapper
-                            .map(product, ProductServiceModel.class);
-
-                    return productServiceModel;
-                }).collect(Collectors.toList());
-    }*/
 
 
 }

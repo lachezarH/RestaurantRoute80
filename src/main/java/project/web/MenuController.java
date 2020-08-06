@@ -58,7 +58,7 @@ public class MenuController {
 
     @GetMapping("/details/{id}")
     public ModelAndView details (@PathVariable("id") String  id ,ModelAndView modelAndView){
-        ProductServiceModel model = this.productService.findById(id);
+        ProductViewModel model = this.productService.findById(id);
         modelAndView.addObject("model", model);
         modelAndView.setViewName("details");
 

@@ -2,6 +2,7 @@ package project.model.binding;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 import project.model.entity.Category;
 import project.model.entity.CategoryName;
 
@@ -15,7 +16,8 @@ public class ProductAddBindingModel {
     private String description;
     private CategoryName category;
     private BigDecimal price;
-    private String imgUrl;
+    private MultipartFile img;
+
 
 
     public ProductAddBindingModel() {
@@ -69,12 +71,11 @@ public class ProductAddBindingModel {
         this.category = category;
     }
 
-    @Length(min = 5, message = "Image url must be more than 5 characters!")
-    public String getImgUrl() {
-        return imgUrl;
+    public MultipartFile getImg() {
+        return img;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImg(MultipartFile img) {
+        this.img = img;
     }
 }

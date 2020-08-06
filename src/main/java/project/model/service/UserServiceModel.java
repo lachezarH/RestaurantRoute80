@@ -28,7 +28,7 @@ public class UserServiceModel extends BaseServiceModel {
     }
 
     @Length(min = 3, max = 20, message = "Password must be between 3 and 20 characters!")
-    @NotNull
+
     public String getPassword() {
         return password;
     }

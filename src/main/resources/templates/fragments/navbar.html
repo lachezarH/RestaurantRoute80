@@ -29,19 +29,34 @@
                 <a class="nav-link" th:href="@{/gallery}">Gallery</a>
             </li>
             <li class="nav-item" >
+                <a class="nav-link" th:href="@{/comments}">Comments</a>
+            </li>
+            <li class="nav-item" >
                 <a class="nav-link" th:href="@{/about-us}">About us</a>
             </li>
             <li class="nav-item" >
                 <a class="nav-link" th:href="@{/contacts}">Contacts</a>
             </li>
-
-            <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item" >
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item" >
+                <a  class="nav-link" th:href="@{/stats}">Stats</a>
+            </li>
+            <li sec:authorize="hasRole('ADMIN')" class="nav-item" >
                 <a  class="nav-link" th:href="@{/products/add}">Add Product</a>
             </li>
 
         </ul>
+        <ul sec:authorize="isAnonymous()" class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <form th:action="@{/registration}" method="get">
+                    <button type="submit"
+                            class="btn btn-link nav-link">
+                        Sign up
+                    </button>
+                </form>
+            </li>
+        </ul>
 
-        <ul class="navbar-nav ml-auto">
+        <ul sec:authorize="hasRole('USER')"  class="navbar-nav ml-auto">
             <li class="nav-item">
                 <form th:action="@{/logout}" method="post">
                     <button type="submit"

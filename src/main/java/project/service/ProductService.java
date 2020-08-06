@@ -5,10 +5,11 @@ import project.model.entity.CategoryName;
 import project.model.service.ProductServiceModel;
 import project.model.view.ProductViewModel;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface ProductService {
-    void addProduct(ProductServiceModel productServiceModel);
+    void addProduct(ProductServiceModel productServiceModel) throws IOException;
 
 
     List<ProductViewModel> findAllProducts();
@@ -22,5 +23,7 @@ public interface ProductService {
 
     void buyAll();
 
-    ProductServiceModel findById(String id);
+    ProductViewModel findById(String id);
+
+
 }

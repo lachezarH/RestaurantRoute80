@@ -3,6 +3,7 @@ package project.model.service;
 
 import org.hibernate.validator.constraints.Length;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.multipart.MultipartFile;
 
 
 import javax.validation.constraints.DecimalMin;
@@ -16,7 +17,8 @@ public class ProductServiceModel {
     private String name;
     private String description;
     private BigDecimal price;
-    private String imgUrl;
+    private MultipartFile img;
+
     private CategoryServiceModel category;
 
     public ProductServiceModel() {
@@ -60,13 +62,12 @@ public class ProductServiceModel {
         this.neededBefore = neededBefore;
     }*/
 
-    @Length(min = 5, message = "Image url must be more than 5 characters!")
-    public String getImgUrl() {
-        return imgUrl;
+    public MultipartFile getImg() {
+        return img;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImg(MultipartFile img) {
+        this.img = img;
     }
 
     public CategoryServiceModel getCategory() {

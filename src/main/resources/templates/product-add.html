@@ -7,29 +7,13 @@
 <header>
     <th:block th:include="~{/fragments/navbar}"></th:block>
 
-    <!--<nav class="navbar navbar-expand-lg bg-nav rounded">
-        <nav class="navbar navbar-expand-lg bg-nav rounded">
-            <a class="nav-link text-white active h5" href="/">Shopping List App</a>
-            <a class="nav-link text-white active h5" href="/products/add">Add Product</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-                <ul class="navbar-nav row">
-                    <li class="nav-item col-md-4">
-                        <a class="nav-link text-white active h5" href="/users/logout">Logout</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
 
-    </nav>-->
 </header>
 <main>
     <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Add product</span></h1>
     <hr class="hr-3 w-25 bg-white"/>
-    <form th:object="${productAddBindingModel}" class="mx-auto w-25 bg-blur rounded" th:method="POST" th:action="@{/products/add}">
+    <form th:object="${productAddBindingModel}" class="mx-auto w-25 bg-blur rounded" th:method="POST"
+          th:action="@{/products/add}" enctype="multipart/form-data">
         <div class="form-group">
             <div class="label-holder textCol d-flex justify-content-center">
                 <label for="name" class="h4 mb-2 text-white">Name</label>
@@ -52,13 +36,6 @@
             <small th:each="e: ${#fields.errors('price')}" th:text="${e}"  class="text-danger">Price error message</small>
         </div>
         <div class="form-group">
-            <div class="label-holder text-white textCol d-flex justify-content-center">
-                <label for="imgUrl" class="h4 mb-2">ImgURL</label>
-            </div>
-            <input th:field="*{imgUrl}" th:errorclass="bg-danger"  type="text" class="form-control" id="imgUrl" name="imgUrl"/>
-            <small th:each="e: ${#fields.errors('imgUrl')}" th:text="${e}"  class="text-danger">Please write imgUrl of product!</small>
-        </div>
-        <div class="form-group">
             <div class="text-white label-holder d-flex justify-content-center">
                 <label for="category" class="h4 mb-2">Category</label>
             </div>
@@ -74,9 +51,18 @@
             </select>
             <small th:each="e: ${#fields.errors('category')}" th:text="${e}" class="text-danger">Category error message</small>
         </div>
+        <div class="form-group">
+            <div class="label-holder text-white textCol d-flex justify-content-center">
+                <label class="h4 mb-2">ImgURL</label>
+            </div>
+            <div class="form-group">
+                <input th:field="*{img}" type="file" class="form-control-file" id="add-title-image" name="img" required="required">
+            </div>
+
 
         <div class="button-holder d-flex justify-content-center">
             <button type="submit" class="btn btn-warning  mb-3" value="Register">Add product</button>
+        </div>
         </div>
     </form>
 </main>

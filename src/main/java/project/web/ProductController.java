@@ -14,6 +14,7 @@ import project.service.ProductService;
 
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequestMapping("/products")
@@ -56,7 +57,7 @@ public class ProductController {
 
         try {
             this.productService.addProduct(this.modelMapper.map(productAddBindingModel, ProductServiceModel.class));
-        }catch (IllegalArgumentException e){
+        }catch (IllegalArgumentException | IOException e){
             redirectAttributes.addFlashAttribute("alreadyExist", true);
             redirectAttributes.addFlashAttribute("productAddBindingModel", productAddBindingModel);
             redirectAttributes.addFlashAttribute("categoryNames", CategoryName.values());

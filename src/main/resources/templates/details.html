@@ -14,40 +14,6 @@
 <header>
     <th:block th:include="~{/fragments/navbar}"></th:block>
 
-    <!--<nav class="navbar navbar-expand-lg bg-nav rounded">
-        <a class="nav-link text-white active h5" href="/">Route 80</a>
-        <ul class="navbar-nav row">
-            <li class="nav-item col-md-4"  sec:authorize="hasRole('ROLE_ADMIN')">
-                <a class="nav-link text-white active h5" href="/products/add">Add product</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav row">
-            <li class="nav-item col-md-4">
-                <a class="nav-link text-white active h5" href="/about-us">About us</a>
-            </li>
-        </ul>
-        <ul class="navbar-nav row">
-            <li class="nav-item col-md-4">
-                <a class="nav-link text-white active h5" href="/contacts">Contacts</a>
-            </li>
-        </ul>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <form th:action="@{/logout}" method="post">
-                        <button type="submit"
-                                class="nav-link text-white active h5">
-                            Logout
-                        </button>
-                    </form>
-                </li>
-            </ul>
-        </div>
-    </nav>-->
 </header>
 <main>
     <div class="container bg-blur rounded mt-5 mb-4" th:each="m :${model}">

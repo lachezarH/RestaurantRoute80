@@ -1,3 +1,4 @@
+/*
 package project.service;
 
 import java.io.IOException;
@@ -42,11 +43,13 @@ public class OAuth2UserAuthSuccessHandler extends SavedRequestAwareAuthenticatio
         if (authentication instanceof OAuth2AuthenticationToken) {
             OAuth2AuthenticationToken oAuth2AuthenticationToken =
                     (OAuth2AuthenticationToken)authentication;
+*/
 /*
             String username =
                     oAuth2AuthenticationToken.
                             getPrincipal().
-                            getAttribute("username");*/
+                            getAttribute("username");*//*
+
             OAuth2AuthorizedClient client = authorizedClientService
                     .loadAuthorizedClient(((OAuth2AuthenticationToken) authentication).getAuthorizedClientRegistrationId(),
                             authentication.getName());
@@ -68,3 +71,4 @@ public class OAuth2UserAuthSuccessHandler extends SavedRequestAwareAuthenticatio
         super.onAuthenticationSuccess(request, response, authentication);
     }
 }
+*/

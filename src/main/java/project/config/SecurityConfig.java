@@ -12,7 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import project.service.OAuth2UserAuthSuccessHandler;
+
 
 
 @Configuration
@@ -23,16 +23,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   private final UserDetailsService userDetailsService;
   private final BCryptPasswordEncoder passwordEncoder;
 
-  private final OAuth2UserAuthSuccessHandler oAuth2UserAuthSuccessHandler;
+  /*private final OAuth2UserAuthSuccessHandler oAuth2UserAuthSuccessHandler;*/
 
-  public SecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder passwordEncoder,OAuth2UserAuthSuccessHandler oAuth2UserAuthSuccessHandler) {
+  public SecurityConfig(UserDetailsService userDetailsService, BCryptPasswordEncoder passwordEncoder) {
     this.userDetailsService = userDetailsService;
     this.passwordEncoder = passwordEncoder;
-    this.oAuth2UserAuthSuccessHandler = oAuth2UserAuthSuccessHandler;
+/*    this.oAuth2UserAuthSuccessHandler = oAuth2UserAuthSuccessHandler;*/
   }
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
+    String[] staticResources  =  {
+            "/css/**",
+            "/img/**",
+            "/js/**",
+
+    };
 
     // for the ant pattern matcher syntax, please check:
     // https://docs.spring.io/spring-framework/docs/current/javadoc-api/org/springframework/util/AntPathMatcher.html
@@ -40,8 +46,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http
         .authorizeRequests()
             .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-            .antMatchers("/login**","/login-error**","/registration**").permitAll()
-
+            .antMatchers(staticResources).permitAll()
+            .antMatchers("/login**","/login-error**","/registration**","/resources/**").permitAll()
         //.antMatchers("/users/login**", "/login-error**","/").permitAll()
             .antMatchers("/**")
         .authenticated().
@@ -56,10 +62,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         .and()
           .logout()
           .logoutUrl("/logout")
-          .logoutSuccessUrl("/home")
+          .logoutSuccessUrl("/login")
           .invalidateHttpSession(true)
           .deleteCookies("JSESSIONID");
-       /* .and().
+        /*.and().
           oauth2Login().
           loginPage("/login").
           successHandler(oAuth2UserAuthSuccessHandler);*/
