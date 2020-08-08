@@ -9,7 +9,6 @@ import project.model.service.UserServiceModel;
 
 public interface UserService {
 
-    UserServiceModel register(UserServiceModel userServiceModel);
 
     UserServiceModel findByUsername(String username);
 
@@ -17,9 +16,7 @@ public interface UserService {
 
     User findByEmail(String email);
 
-  /*  User createUser();*/
 
-   // void initRoles();
 
     void login(String username);
 

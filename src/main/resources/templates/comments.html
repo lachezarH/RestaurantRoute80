@@ -6,19 +6,12 @@
 
 <body>
 
-<!-- Behaviour -->
-<!--<script sec:authorize="hasRole('ADMIN')">
-    $(document).on("click", ".open-delete-dialog", function () {
-        $("#deleteId").val($(this).data('id'));
-    });
-</script>-->
-<!-- EO: Behaviour-->
 
-<!-- Navbar -->
+
+
 <th:block th:include="~{/fragments/navbar}"></th:block>
 
-<!--<div th:replace="fragments/navbar :: navbar('announcements')">Navbar here</div>-->
-<!-- EO: Navbar -->
+
 
 <h1 class="text-center mt-2"> <div class="right">
     <a class="new-button btn btn-danger rounded-right" th:href="@{/comments/new}" role="button">New comment
@@ -43,13 +36,7 @@
                     </small>
                 </div>
                 <div sec:authorize="hasRole('ADMIN')">
-                    <!--<button type="button"
-                            class="open-delete-dialog btn btn-primary"
-                            data-toggle="modal"
-                            data-target="#deleteModal"
-                            th:data-id="*{id}">
-                        <i class="fas fa-trash mx-1"></i>
-                    </button>-->
+
                     <a class="ml-3 text-danger" th:href="@{/comments/delete/{id}(id = *{id})}">Delete</a>
                 </div>
             </div>
@@ -63,15 +50,15 @@
 
 
 
-<!-- Delete announcement-->
+
 <div sec:authorize="hasRole('ADMIN')" th:replace="delete-comment :: delete-comment">
     Modal dialog for delete
 </div>
-<!-- EO: Delete announcement-->
 
-<!-- Bootstap JS -->
+
+
 <div th:replace="fragments/bootstrap-js :: bootstrap-js"></div>
-<!-- EO: Bootstap JS -->
+
 
 </body>
 </html>

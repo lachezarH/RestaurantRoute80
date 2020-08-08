@@ -23,6 +23,7 @@ public class MenuController {
     }
 
 
+    // list all Products by Category in menu page
     @GetMapping("/menu")
     ModelAndView menu(ModelAndView modelAndView){
         List<ProductViewModel> productViewModels = this.productService.findAllProducts();
@@ -49,6 +50,7 @@ public class MenuController {
         return modelAndView;
     }
 
+    //mapping for basic buy method
     @GetMapping("/buy/{id}")
     public String buy(@PathVariable("id") String  id){
         this.productService.buy(id);
@@ -56,6 +58,7 @@ public class MenuController {
         return "redirect:/";
     }
 
+    //details for one product
     @GetMapping("/details/{id}")
     public ModelAndView details (@PathVariable("id") String  id ,ModelAndView modelAndView){
         ProductViewModel model = this.productService.findById(id);

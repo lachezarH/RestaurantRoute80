@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import project.model.entity.RoleEntity;
 import project.model.entity.User;
-import project.model.entity.UserRole;
 import project.model.service.UserServiceModel;
 import project.repository.RoleRepository;
 import project.repository.UserRepository;
@@ -44,17 +43,9 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    @Override
-    public UserServiceModel register(UserServiceModel userServiceModel) {
-        User user = this.modelMapper.map(userServiceModel, User.class);
 
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRoles(Collections.singletonList(this.roleRepository.findByRole("USER_ROLE")));
 
-        return this.modelMapper.map(this.userRepository.saveAndFlush(user),
-                UserServiceModel.class);
-    }
-
+    //find UserServiceModel by username
     @Override
     public UserServiceModel findByUsername(String username) {
 
@@ -64,6 +55,7 @@ public class UserServiceImpl implements UserService {
                 .orElse(null);
     }
 
+    //find User by email
     @Override
     public User findByEmail(String email) {
         return this.userRepository.findOneByEmail(email)
@@ -72,27 +64,8 @@ public class UserServiceImpl implements UserService {
                 .orElse(null);
     }
 
-/*    @Override
-    public User createUser() {
-        RoleEntity role = new RoleEntity();
-        role.setRole("ADMIN");
-        List<RoleEntity> roles = new ArrayList<>();
-        roles.add(role);
-        User user = new User("Admin", "1234", "loko@gmail.com", roles);
 
-        return this.userRepository.save(user);
-    }*/
-
-  /*  @Override
-    public void initRoles() {
-        if (this.roleRepository.count() == 0) {
-            Arrays.stream(UserRole.values())
-                    .forEach(role -> {
-                        this.roleRepository.save(new RoleEntity(role.name()));
-                    });
-        }
-    }*/
-
+    //spring security login method
     @Override
     public void login(String username) {
 
@@ -107,6 +80,7 @@ public class UserServiceImpl implements UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
+    //return boolean for user exists in userRepository or no BY username
     @Override
     public boolean exists(String username) {
 
@@ -116,6 +90,7 @@ public class UserServiceImpl implements UserService {
             return userEntityOpt.isPresent();
         }
 
+    //return boolean for user exists in userRepository or no BY email
     @Override
     public boolean existsByEmail(String email) {
         Optional<User> userEntityOpt =
@@ -124,6 +99,7 @@ public class UserServiceImpl implements UserService {
         return userEntityOpt.isPresent();
     }
 
+    //spring security method for register and login in app
     @Override
     public void registerAndLoginUser(UserServiceModel userServiceModel) {
         User userEntity = createUser(userServiceModel);
@@ -139,6 +115,7 @@ public class UserServiceImpl implements UserService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
+    //create save and return user
     @Override
     public User createUser(UserServiceModel userServiceModel) {
         LOGGER.info("Creating a new user with email [PROTECTED].");
@@ -160,6 +137,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(userEntity);
     }
 
+    //this method is for facebook login who doesn't work i should to fix it
     @Override
     public User getOrCreateUser(String  username) {
         Optional<User> userOpt =
@@ -169,6 +147,7 @@ public class UserServiceImpl implements UserService {
                 orElseGet(() -> createUserFromFacebook(username));
     }
 
+    //this method is for facebook login who doesn't work i should to fix it
     @Override
     public User createUserFromFacebook(String username) {
         UserServiceModel userServiceModel = new UserServiceModel();

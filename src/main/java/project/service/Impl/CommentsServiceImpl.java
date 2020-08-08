@@ -25,7 +25,7 @@ public class CommentsServiceImpl implements CommentsService {
 
 
 
-
+    //create comments and save it
     @Override
     public void updateOrCreateComments(CommentsBindingModel commentsBindingModel) {
         if (commentsBindingModel.getAuthor().isEmpty()){
@@ -40,11 +40,13 @@ public class CommentsServiceImpl implements CommentsService {
         commentsRepository.saveAndFlush(comments);
     }
 
+    //delete comment by ID
     @Override
     public void deleteComments(String  commentsId) {
         this.commentsRepository.deleteById(commentsId);
     }
 
+    //findAll comments return List<CommentsBindingModel> models
     @Override
     public List<CommentsBindingModel> findAll() {
         return this.commentsRepository.findAll()

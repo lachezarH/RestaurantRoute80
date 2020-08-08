@@ -20,7 +20,7 @@ public class DataInit implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
       //  this.userService.initRoles();
-        this.categoryService.initCategories();
+       // this.categoryService.initCategories();
 
 
     }

@@ -12,5 +12,7 @@ public interface CategoryService {
 
     CategoryServiceModel findByName(CategoryName name);
 
+    Category createByCategoryName(CategoryName categoryName);
+
 
 }

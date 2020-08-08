@@ -23,6 +23,8 @@ public class CloudinaryServiceImpl implements CloudinaryService {
     this.cloudinary = cloudinary;
   }
 
+
+  //upload image to my cloudinary repository then return String url to get image
   @Override
   public String uploadImage(MultipartFile multipartFile) throws IOException {
     File imgFile = File.createTempFile(TEMP_FILE_PREFIX,

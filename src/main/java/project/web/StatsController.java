@@ -20,6 +20,7 @@ public class StatsController {
     this.productService = productService;
   }
 
+  //this show me stats for requestCount and how many products we have in productRepository
   @GetMapping("/stats")
   public String stats(Model model) {
 

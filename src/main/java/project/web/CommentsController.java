@@ -21,6 +21,7 @@ public class CommentsController {
         this.commentsService = commentsService;
     }
 
+    //return all comments
     @GetMapping
     public String comments(Model model) {
         model.addAttribute("active", "comments");
@@ -29,6 +30,8 @@ public class CommentsController {
         return "comments";
     }
 
+
+    //return new-comments page
     @GetMapping("/new")
     @PreAuthorize("hasRole('USER')")
     public String newAnnouncement(Model model) {
@@ -37,12 +40,15 @@ public class CommentsController {
         return "new-comments";
     }
 
+
+    //save comments in commentsRepository
     @PostMapping("/save")
+    @PreAuthorize("hasRole('USER')")
     public String save(@Valid @ModelAttribute("formData") CommentsBindingModel commentsBindingModel,
                        BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
-            return "/comments/new";
+            return "redirect:/comments/new";
         }
 
         commentsService.updateOrCreateComments(commentsBindingModel);
@@ -51,6 +57,7 @@ public class CommentsController {
         return "redirect:/comments";
     }
 
+    //delete comment from commentsRepository
     @GetMapping("/delete/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     public String delete(@PathVariable("id") String  id) {

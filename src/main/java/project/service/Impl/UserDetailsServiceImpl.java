@@ -27,6 +27,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
   private final UserRepository userRepository;
 
 
+  //spring security method for load user from userRepository
   @Override
   public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -39,6 +40,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         () -> new UsernameNotFoundException("No user " + username));
   }
 
+  //spring security method for mapping
   private User map(project.model.entity.User user) {
 
     List<GrantedAuthority> authorities = user.

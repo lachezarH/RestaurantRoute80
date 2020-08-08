@@ -43,17 +43,6 @@ public class ProductAddBindingModel {
     }
 
 
-    /*@NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
-    @FutureOrPresent(message = "The date cannot be in the past")
-    public LocalDateTime getNeededBefore() {
-        return neededBefore;
-    }
-
-    public void setNeededBefore(LocalDateTime neededBefore) {
-        this.neededBefore = neededBefore;
-    }*/
-
     @DecimalMin(value = "0")
     public BigDecimal getPrice() {
         return price;

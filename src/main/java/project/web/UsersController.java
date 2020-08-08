@@ -2,6 +2,7 @@ package project.web;
 
 
 import org.modelmapper.ModelMapper;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Controller;
@@ -35,11 +36,13 @@ public class UsersController {
     }
 
 
+    //go to login page
     @GetMapping(value = "/login")
     public String loginPage() {
         return "login";
     }
 
+    //this catching errors when we try to log
     @PostMapping("/login-error")
     public ModelAndView onLoginError(
             @ModelAttribute(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY) String user, BindingResult bindingResult) {
@@ -49,7 +52,7 @@ public class UsersController {
         ModelAndView modelAndView = new ModelAndView();
 
         if (bindingResult.hasErrors() || modelAndView.isEmpty()) {
-            //TODO: setView error-page
+
 
             modelAndView.addObject("error", "bad_credentials");
             modelAndView.addObject("user", user);
@@ -59,7 +62,7 @@ public class UsersController {
         return modelAndView;
     }
 
-
+    //go to registration page
     @GetMapping("/registration")
     public ModelAndView showRegister(ModelAndView model) {
         model.addObject("formData", new UserRegisterBindingModel());
@@ -67,6 +70,7 @@ public class UsersController {
         return model;
     }
 
+    //registration and  redirect to login
     @PostMapping("/registration")
     public ModelAndView register(@Valid @ModelAttribute("formData") UserRegisterBindingModel userRegisterBindingModel,
                            BindingResult bindingResult, ModelAndView modelAndView ) {
@@ -102,6 +106,14 @@ public class UsersController {
 
         return modelAndView;
 
+    }
+
+    //this is useless
+    @GetMapping("/info")
+    @PreAuthorize("hasRole('ADMIN')")
+    public String infoUser(){
+
+        return "info-user";
     }
 
 

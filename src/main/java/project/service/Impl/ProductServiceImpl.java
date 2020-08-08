@@ -35,12 +35,13 @@ public class ProductServiceImpl implements ProductService {
 
 
 
+    //adding products to repository by ProductServiceModel
     @Override
     @Transactional
     public void addProduct(ProductServiceModel productServiceModel) throws IOException {
 
         Product product = this.modelMapper.map(productServiceModel, Product.class);
-        Category category = this.modelMapper.map(this.categoryService.findByName(productServiceModel.getCategory().getCategoryName()), Category.class);
+        Category category = this.categoryService.createByCategoryName(productServiceModel.getCategory().getCategoryName());
 
         String imgUrl = this.cloudinaryService.uploadImage(productServiceModel.getImg());
 
@@ -51,6 +52,7 @@ public class ProductServiceImpl implements ProductService {
         this.productRepository.saveAndFlush(product);
     }
 
+    //findAll products return List<ProductViewModel> models
     @Override
     public List<ProductViewModel> findAllProducts() {
         return this.productRepository
@@ -68,6 +70,7 @@ public class ProductServiceImpl implements ProductService {
                 }).collect(Collectors.toList());
     }
 
+    //findAll products by Category return List<ProductViewModel> models
     @Override
     public List<ProductViewModel> findAllByCategory(String categoryName) {
         Category category = this.modelMapper.map(this.categoryService.findByName(CategoryName.valueOf(categoryName)), Category.class);
@@ -80,21 +83,21 @@ public class ProductServiceImpl implements ProductService {
         return products;
     }
 
+    //count of products in productRepository
     @Override
     public long countOfProducts() {
         return this.productRepository.count();
     }
 
+    //basic buy method who just delete product from productRepository
+    //TODO: should implements real buy method
     @Override
     public void buy(String id) {
         this.productRepository.deleteById(id);
     }
 
-    @Override
-    public void buyAll() {
-        this.productRepository.deleteAll();
-    }
 
+    //find ProductViewModel by ID
     @Override
     public ProductViewModel findById(String id) {
         Optional<Product> product = this.productRepository.findById(id);

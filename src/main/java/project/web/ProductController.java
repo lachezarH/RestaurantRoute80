@@ -29,6 +29,7 @@ public class ProductController {
     }
 
 
+    //go to product-add
     @GetMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
     public String add(Model model) {
@@ -41,6 +42,7 @@ public class ProductController {
         return "product-add";
     }
 
+    //adding product in productRepository
     @PostMapping("/add")
     @PreAuthorize("hasRole('ADMIN')")
     public String addConfirm(@Valid @ModelAttribute("productAddBindingModel")ProductAddBindingModel productAddBindingModel,
@@ -67,19 +69,17 @@ public class ProductController {
 
         }
 
-        return "home";
+        return "redirect:/menu";
     }
+
+    //mapping for basic buy method
     @GetMapping("/buy/{id}")
+    @PreAuthorize("hasRole('USER')")
     public String buy(@PathVariable("id") String  id){
         this.productService.buy(id);
 
         return "redirect:/";
     }
 
-    @GetMapping("/buy/all")
-    public String buyAll(){
-        this.productService.buyAll();
 
-        return "redirect:/";
-    }
 }

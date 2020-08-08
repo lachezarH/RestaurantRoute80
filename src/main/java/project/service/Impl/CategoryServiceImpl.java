@@ -11,6 +11,7 @@ import project.service.CategoryService;
 
 
 import java.util.Arrays;
+import java.util.Objects;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -24,11 +25,14 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
 
+    //find category by enum CategoryName and return Category
     @Override
     public Category find(CategoryName categoryName) {
         return this.categoryRepository.findCategoriesByCategoryName(categoryName).orElse(null);
     }
 
+    //inti all CategoryName.values() to categoryRepository
+    //this is useless
     @Override
     public void initCategories() {
         if (this.categoryRepository.count() == 0) {
@@ -41,9 +45,23 @@ public class CategoryServiceImpl implements CategoryService {
         }
     }
 
+    //find category by enum CategoryName and return CategoryServiceModel
     @Override
     public CategoryServiceModel findByName(CategoryName name) {
+        Category category = this.categoryRepository.findCategoriesByCategoryName(name).orElse(null);
 
-        return this.modelMapper.map(this.categoryRepository.findCategoriesByCategoryName(name).orElse(null), CategoryServiceModel.class);
+        return this.modelMapper.map(Objects.requireNonNull(category), CategoryServiceModel.class);
+    }
+
+    //creating Category by  enum CategoryName
+    @Override
+    public Category createByCategoryName(CategoryName categoryName) {
+
+        Category category = new Category();
+        category.setCategoryName(categoryName);
+        category.setDescription(String.format("Description for %s",
+                categoryName.name()));
+
+        return this.categoryRepository.save(category);
     }
 }

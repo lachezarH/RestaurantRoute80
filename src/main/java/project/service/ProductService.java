@@ -15,13 +15,12 @@ public interface ProductService {
     List<ProductViewModel> findAllProducts();
     List<ProductViewModel> findAllByCategory(String categoryName);
 
-   // BigDecimal sumOfPrice(List<ProductServiceModel> productServiceModels);
 
     long countOfProducts();
 
     void buy(String id);
 
-    void buyAll();
+
 
     ProductViewModel findById(String id);
 

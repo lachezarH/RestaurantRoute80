@@ -18,32 +18,36 @@ public class HomeController {
     }
 
 
+    //go to home page
     @GetMapping("/")
     public String home(Model model) {
         return "/home";
     }
 
+    //go to home page
     @GetMapping("/home")
     public String homeAbsolute(Model model) {
         return home(model);
     }
 
+    //go to home page
     @PostMapping("/home")
     public String homePost() {
         return "redirect:/home";
     }
-
+    //go to contacts page
     @GetMapping("/contacts")
     public String contacts(){
 
         return "contacts";
     }
+    //go to about-us page
     @GetMapping("/about-us")
     public String aboutUs(){
 
         return "about-us";
     }
-
+    //go to gallery page
     @GetMapping("/gallery")
     public String gallery(){
 
